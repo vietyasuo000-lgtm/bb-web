@@ -275,8 +275,8 @@ def home():
     <br>
 
     <p>
-        © 2026 Shop Của Long
-                              LIEN HE VOI CHUNG TOI 
+        © 2026 Shop Của Long<br>
+        <h1>LIEN HE VOI CHUNG TOI: 0982618795</h1> 
     </p>
 
 </footer>
