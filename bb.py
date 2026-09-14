@@ -276,7 +276,7 @@ def home():
 
     <p>
         © 2026 Shop Của Long<br>
-        Lienhechungtoi:0982618795
+        Lien He Voi Chung Toi:0982618795
     </p>
 
 </footer>
