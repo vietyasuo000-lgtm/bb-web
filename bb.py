@@ -379,6 +379,63 @@ function buy(product) {
 }
 
 </script>
+<div id="orderForm" style="display:none;">
+    <h2>🛒 Thông tin đặt hàng</h2>
+
+    <p id="productName"></p>
+    <p id="productPrice"></p>
+
+    <input type="text" id="name" placeholder="Họ và tên">
+    <br><br>
+
+    <input type="tel" id="phone" placeholder="Số điện thoại">
+    <br><br>
+
+    <input type="text" id="address" placeholder="Địa chỉ nhận hàng">
+    <br><br>
+
+    <button onclick="confirmOrder()">
+        ✅ Xác nhận đặt hàng
+    </button>
+
+    <button onclick="closeForm()">
+        ❌ Hủy
+    </button>
+</div>
+
+<script>
+function buy(product, price) {
+    document.getElementById("orderForm").style.display = "block";
+
+    document.getElementById("productName").innerText =
+        "Sản phẩm: " + product;
+
+    document.getElementById("productPrice").innerText =
+        "Giá: " + price;
+}
+
+function confirmOrder() {
+    let name = document.getElementById("name").value;
+    let phone = document.getElementById("phone").value;
+    let address = document.getElementById("address").value;
+
+    if (name === "" || phone === "" || address === "") {
+        alert("⚠️ Vui lòng nhập đầy đủ họ tên, số điện thoại và địa chỉ!");
+        return;
+    }
+
+    alert(
+        "✅ Đặt hàng thành công!\n\n" +
+        "Họ tên: " + name + "\n" +
+        "SĐT: " + phone + "\n" +
+        "Địa chỉ: " + address
+    );
+}
+
+function closeForm() {
+    document.getElementById("orderForm").style.display = "none";
+}
+</script>
 
 </body>
 </html>
