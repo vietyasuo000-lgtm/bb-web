@@ -238,6 +238,90 @@ def home():
             </button>
 
         </div>
+        
+
+        <div class="product">
+
+    <div class="icon">
+        💻
+    </div>
+
+    <h3>
+        Laptop(CỦA LONG)
+    </h3>
+
+    <div class="price">
+        15.000.000đ
+    </div>
+
+    <button onclick="buy('Laptop của Long')">
+        🛒 Mua ngay
+    </button>
+
+</div>
+
+
+<div class="product">
+
+    <div class="icon">
+        📱
+    </div>
+
+    <h3>
+        Điện thoại(CỦA LONG)
+    </h3>
+
+    <div class="price">
+        8.000.000đ
+    </div>
+
+    <button onclick="buy('Điện thoại của Long')">
+        🛒 Mua ngay
+    </button>
+
+</div>
+
+
+<div class="product">
+
+    <div class="icon">
+        🎒
+    </div>
+
+    <h3>
+        Balo(CỦA LONG)
+    </h3>
+
+    <div class="price">
+        300.000đ
+    </div>
+
+    <button onclick="buy('Balo của Long')">
+        🛒 Mua ngay
+    </button>
+
+</div>
+
+
+<div class="product">
+
+    <div class="icon">
+        🎧
+    </div>
+
+    <h3>
+        Tai nghe(CỦA LONG)
+    </h3>
+
+    <div class="price">
+        700.000đ
+    </div>
+
+    <button onclick="buy('Tai nghe của Long')">
+        🛒 Mua ngay
+    </button>
+
+</div>
 
 
         <div class="product">
