@@ -564,7 +564,7 @@ footer a {
 <header>
 
     <div class="logo">
-        🛍️ SHOP <span>CỦA LONG</span>
+        🛍️ DEMO <span>STORE</span>
     </div>
 
     <nav>
