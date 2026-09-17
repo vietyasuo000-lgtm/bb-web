@@ -573,6 +573,7 @@ footer a {
         <a href="#sale">🔥 SALE</a>
         <a href="#about">GIỚI THIỆU</a>
         <a href="#contact">LIÊN HỆ</a>
+        <a href="/game">🎮 GAME</a>
     </nav>
 
     <input
@@ -978,7 +979,7 @@ footer a {
                 Cho đơn từ 300.000đ
             </p>
 
-            <b>SHOP CỦA LONG 💙</b>
+            <b>DEMO STORE 💙</b>
 
         </div>
 
@@ -1014,7 +1015,7 @@ footer a {
 <div class="container" id="about">
 
     <div class="section-title">
-        <h2>💙 Vì sao chọn SHOP CỦA LONG?</h2>
+        <h2>💙 Vì sao chọn DEMO STORE?</h2>
     </div>
 
     <div class="benefits">
@@ -1145,7 +1146,7 @@ footer a {
 
     <div class="newsletter">
 
-        <h2>💌 Nhận ưu đãi từ SHOP CỦA LONG</h2>
+        <h2>💌 Nhận ưu đãi từ DEMO STORE</h2>
 
         <p>
             Đăng ký để nhận mã giảm giá mới nhất!
@@ -1358,6 +1359,136 @@ function closeForm() {
 </script>
 
 
+</body>
+</html>
+"""
+
+
+@app.route("/game")
+def game():
+    return """
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Snake Game - DEMO STORE</title>
+<style>
+* { box-sizing: border-box; font-family: Arial, sans-serif; }
+body { margin: 0; min-height: 100vh; display: flex; justify-content: center; align-items: center; background: linear-gradient(135deg, #eaf7ff, #fff1f7); }
+.game-box { background: white; padding: 25px; border-radius: 28px; box-shadow: 0 15px 40px rgba(80,90,120,0.15); text-align: center; }
+h1 { color: #4b8dcc; margin-top: 0; }
+#score { color: #ff5f91; font-size: 20px; font-weight: bold; margin-bottom: 12px; }
+canvas { display: block; margin: auto; background: #f3fff7; border: 4px solid #8fd1a8; border-radius: 12px; max-width: 100%; }
+button, .back { display: inline-block; margin-top: 18px; padding: 12px 22px; border: none; border-radius: 20px; background: #ff77a7; color: white; font-weight: bold; cursor: pointer; text-decoration: none; }
+button:hover, .back:hover { background: #ff5b96; }
+.back { background: #4b8dcc; margin-left: 8px; }
+p { color: #667085; }
+</style>
+</head>
+<body>
+<div class="game-box">
+<h1>🐍 Snake Game</h1>
+<div id="score">Điểm: 0</div>
+<canvas id="canvas" width="400" height="400"></canvas>
+<button onclick="restartGame()">🔄 Chơi lại</button>
+<a class="back" href="/">⬅️ Về Shop</a>
+<p>Dùng các phím ↑ ↓ ← → để di chuyển</p>
+</div>
+<script>
+const canvas = document.getElementById("canvas");
+const ctx = canvas.getContext("2d");
+const SIZE = 20;
+const TOTAL = 20;
+let snake, food, direction, nextDirection, score, gameRunning, timer;
+
+function startGame() {
+    clearInterval(timer);
+    snake = [{x: 10, y: 10}, {x: 9, y: 10}, {x: 8, y: 10}];
+    food = null;
+    direction = "RIGHT";
+    nextDirection = "RIGHT";
+    score = 0;
+    gameRunning = true;
+    createFood();
+    document.getElementById("score").textContent = "Điểm: " + score;
+    timer = setInterval(updateGame, 120);
+}
+
+function createFood() {
+    do {
+        food = { x: Math.floor(Math.random() * TOTAL), y: Math.floor(Math.random() * TOTAL) };
+    } while (snake.some(part => part.x === food.x && part.y === food.y));
+}
+
+document.addEventListener("keydown", function(e) {
+    const keys = {
+        ArrowUp: "UP", ArrowDown: "DOWN",
+        ArrowLeft: "LEFT", ArrowRight: "RIGHT"
+    };
+    if (!keys[e.key]) return;
+    e.preventDefault();
+    const newDirection = keys[e.key];
+    if ((direction === "UP" && newDirection === "DOWN") ||
+        (direction === "DOWN" && newDirection === "UP") ||
+        (direction === "LEFT" && newDirection === "RIGHT") ||
+        (direction === "RIGHT" && newDirection === "LEFT")) return;
+    nextDirection = newDirection;
+});
+
+function updateGame() {
+    if (!gameRunning) return;
+    direction = nextDirection;
+    const head = {...snake[0]};
+    if (direction === "UP") head.y--;
+    if (direction === "DOWN") head.y++;
+    if (direction === "LEFT") head.x--;
+    if (direction === "RIGHT") head.x++;
+
+    if (head.x < 0 || head.x >= TOTAL || head.y < 0 || head.y >= TOTAL ||
+        snake.some(part => part.x === head.x && part.y === head.y)) {
+        endGame();
+        return;
+    }
+
+    snake.unshift(head);
+    if (head.x === food.x && head.y === food.y) {
+        score++;
+        document.getElementById("score").textContent = "Điểm: " + score;
+        createFood();
+    } else {
+        snake.pop();
+    }
+    drawGame();
+}
+
+function drawGame() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = "#ff77a7";
+    ctx.beginPath();
+    ctx.arc(food.x * SIZE + SIZE/2, food.y * SIZE + SIZE/2, SIZE/2 - 3, 0, Math.PI * 2);
+    ctx.fill();
+
+    snake.forEach((part, index) => {
+        ctx.fillStyle = index === 0 ? "#4b8dcc" : "#7ac0e8";
+        ctx.fillRect(part.x * SIZE + 1, part.y * SIZE + 1, SIZE - 2, SIZE - 2);
+    });
+}
+
+function endGame() {
+    gameRunning = false;
+    clearInterval(timer);
+    setTimeout(() => alert("💥 Game Over! Điểm của bạn: " + score), 50);
+}
+
+function restartGame() {
+    startGame();
+    drawGame();
+}
+
+startGame();
+drawGame();
+</script>
 </body>
 </html>
 """
